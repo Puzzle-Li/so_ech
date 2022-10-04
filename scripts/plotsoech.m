@@ -4,17 +4,19 @@ arguments
     prepopt.lpcutoff (1,2) double = [30 3.5] % Low-pass filtering 
     % is performed on the data before and after downsampling respectively, 
     % and the first and two elements of the vector represent the cutoff 
-    % frequencies of the two filtering respectively. 
-    prepopt.dsfreq double = 100 % Downsampling is required to calculate ECH. 
-    soopt.ampfold double = 1.25 % A wave with a amplitude greater than
-    % 'ampfold' times the average of all amplitudes is considered as a SO. 
-    soopt.npfold double = 1.25 % A wave with a negtive peak value greater 
-    % than 'npfold' times the average of all negtive peak value is 
+    % frequencies (Hz) of the two filterings respectively. 
+    prepopt.dsfreq double = 100 % Low sampling rate (Hz) is required to 
+    % calculate ECH. 
+    soopt.ampfold double = 1.25 % An oscillation with an amplitude greater 
+    % than 'ampfold' times the average of all amplitudes is considered as a 
+    % SO. 
+    soopt.npfold double = 1.25 % An oscillation with a negative peak value 
+    % greater than 'npfold' times the average of all negative peak value is 
     % considered as a SO. 
-    soopt.durlim (1,2) double = [0.9 2] % A wave with a duration limited in
-    % 'durlim' is considered as a SO. 
-    echopt.toi (1,2) double = [-2 4] % ECH time of interest. 
-    echopt.binwidth double = .05 % ECH bin width. 
+    soopt.durlim (1,2) double = [0.9 2] % An oscillation with a duration 
+    % limited in 'durlim' (seconds) is considered as a SO. 
+    echopt.toi (1,2) double = [-2 4] % ECH time of interest (seconds)..
+    echopt.binwidth double = .05 % ECH bin width (seconds). 
 
 end
 
@@ -98,6 +100,7 @@ ylabel('Slow oscillation occurrence (Hz)');
 xtl = get(gca,'XTickLabel');
 xtl{strcmp(xtl,'0')} = 'Stimuli';
 set(gca,'XTickLabel',xtl);
+ax = gca;
 print(gcf,fullfile(dn.data,'ech'),'-dpdf','-r300');
 end
 
